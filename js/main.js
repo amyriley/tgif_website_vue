@@ -51,7 +51,7 @@ var app = new Vue({
             })
             
             states.sort();
-            this.stateList = this.stateList.concat(states);
+            this.stateList = states;
             
             return this.stateList;
         },

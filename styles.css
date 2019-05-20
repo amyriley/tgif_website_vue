@@ -59,22 +59,25 @@ h2 {
     height: 15px;
 }
 
-.checkbox-inline {
-    margin-right: 10px;
-    margin-left: 10px;
-}
-
 td {
     text-align: center;
 }
 
-th {
+thead {
     text-align: center;
 }
 
 #state-label {
     margin-right: 5px;
     margin-left: 50px;
+}
+
+.checkboxes {
+    padding-left: 10px;
+}
+
+input {
+    padding-left: 
 }
 
 

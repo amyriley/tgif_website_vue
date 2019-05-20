@@ -6,15 +6,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <link rel="stylesheet" href="styles.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
     <title>Senate</title>
 
 </head>
 
 <body>
-    <div class="container" id="app">
+    <div id="app">
         <header>
             <div class="row">
                 <div class="col-md-auto">
@@ -49,24 +49,6 @@
                             <a class="dropdown-item" href="#">Senate</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Attendance
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="house-attendance.html">House</a>
-                            <a class="dropdown-item" href="senate-attendance.html">Senate</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Party Loyalty
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="house-party-loyalty.html">House</a>
-                            <a class="dropdown-item" href="senate-party-loyalty.html">Senate</a>
-                        </div>
-                    </li>
                 </ul>
             </div>
         </nav>
@@ -81,11 +63,11 @@
                         <label>
                             Filter by party:
                         </label>
-                        <input type="checkbox" id="democrat" value="D" v-model="selectedParties">
+                        <input class="checkboxes" type="checkbox" id="democrat" value="D" v-model="selectedParties">
                         <label for="democrat">Democrat</label>
-                        <input type="checkbox" id="republican" value="R" v-model="selectedParties">
+                        <input class="checkboxes" type="checkbox" id="republican" value="R" v-model="selectedParties">
                         <label for="republican">Republican</label>
-                        <input type="checkbox" id="independent" value="I" v-model="selectedParties">
+                        <input class="checkboxes" type="checkbox" id="independent" value="I" v-model="selectedParties">
                         <label for="independent">Independent</label>
                     </form>
                 </div>
@@ -114,7 +96,9 @@
                 </thead>
                 <tbody id="table-body">
                     <tr v-for="member in filterMembers">
-                        <td>{{member.first_name}} {{member.middle_name}} {{member.last_name}}</td>
+                        <td>
+                            <a :href="member.url">{{member.first_name}} {{member.middle_name}} {{member.last_name}}</a>
+                        </td>
                         <td>{{member.party}}</td>
                         <td>{{member.state}}</td>
                         <td>{{member.seniority}}</td>
@@ -123,19 +107,19 @@
                 </tbody>
             </table>
         </div>
-        <footer class="footer">
-            <div class="container">
-                <span class="text-muted">&#9400; 2019 TGIF | All Rights Reserved</span>
-            </div>
-        </footer>
-
-        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-        <script src="./js/main.js"></script>
-
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </div>
 </body>
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted">&#9400; 2019 TGIF | All Rights Reserved</span>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="./js/main.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </html>
