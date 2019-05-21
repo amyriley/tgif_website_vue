@@ -7,6 +7,32 @@ header {
     margin-bottom: 75px;
 }
 
+h1 {
+    padding-top: 10px;
+}
+
+#member-link {
+    color: black;
+    text-decoration: underline;
+}
+
+#member-link:hover {
+    color: #03aba5;
+}
+
+.card-link {
+    color: #03aba5;
+}
+
+.card-link:hover {
+    text-decoration: underline;
+    color: #03aba5;
+}
+
+#mailto {
+    color: #03aba5;
+}
+
 h2 {
     margin-bottom: 20px;
 }
@@ -44,8 +70,8 @@ h2 {
 
 #logo-image {
     margin-left: 10px;
-    width: 50px;
-    height: 50px;
+    width: 75px;
+    height: 75px;
 }
 
 #graph-image {
@@ -74,10 +100,6 @@ thead {
 
 .checkboxes {
     padding-left: 10px;
-}
-
-input {
-    padding-left: 
 }
 
 

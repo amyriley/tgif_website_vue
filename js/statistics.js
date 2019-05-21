@@ -56,7 +56,7 @@ function getAveragePercentPartyVotes(politicalData, partyIndicator) {
     var averagePercentage = totalPercentage / totalMembersList.length;
     
     if (isNaN(averagePercentage)) {
-        averagePercentage = 0;
+        averagePercentage = '-';
     }
     
     return averagePercentage;
@@ -223,6 +223,17 @@ function atAGlanceTable(storedData) {
     table.appendChild(tableBody);
 }
 
+function createNameCell(url, row) {
+    var fullName = values[i].first_name + ' ' + (values[i].middle_name || "") + ' ' + values[i].last_name;
+    var nameCell = document.createElement('td');
+    var nameLink = document.createElement('a');
+    nameLink.text = fullName;
+    nameLink.href = values[i].url;
+    
+    nameCell.appendChild(nameLink);
+    row.appendChild(nameCell);
+}
+
 function leastEngagedTable(storedData) {
 
     var table = document.getElementById('least_engaged_table');
@@ -237,9 +248,7 @@ function leastEngagedTable(storedData) {
     for (var i = 0; i < values.length; i++) {
         var row = document.createElement('tr');
 
-        var nameCell = document.createElement('td');
-        nameCell.innerHTML = values[i].first_name + ' ' + (values[i].middle_name || "") + ' ' + values[i].last_name;
-        row.appendChild(nameCell);
+        createNameCell(values[i].url, row);
 
         var numberMissedVotes = document.createElement('td');
         numberMissedVotes.innerHTML = values[i].missed_votes;
@@ -269,9 +278,7 @@ function mostEngagedTable(storedData) {
     for (var i = 0; i < values.length; i++) {
         var row = document.createElement('tr');
 
-        var nameCell = document.createElement('td');
-        nameCell.innerHTML = values[i].first_name + ' ' + (values[i].middle_name || "") + ' ' + values[i].last_name;
-        row.appendChild(nameCell);
+        createNameCell(values[i].url, row);
 
         var numberMissedVotes = document.createElement('td');
         numberMissedVotes.innerHTML = values[i].missed_votes;
@@ -302,9 +309,7 @@ function leastLoyalTable(storedData) {
     for (var i = 0; i < values.length; i++) {
         var row = document.createElement('tr');
 
-        var nameCell = document.createElement('td');
-        nameCell.innerHTML = values[i].first_name + ' ' + (values[i].middle_name || "") + ' ' + values[i].last_name;
-        row.appendChild(nameCell);
+        createNameCell(values[i].url, row);
 
         var numberPartyVotes = document.createElement('td');
         numberPartyVotes.innerHTML = values[i].total_votes;
@@ -334,9 +339,7 @@ function mostLoyalTable(storedData) {
     for (var i = 0; i < values.length; i++) {
         var row = document.createElement('tr');
 
-        var nameCell = document.createElement('td');
-        nameCell.innerHTML = values[i].first_name + ' ' + (values[i].middle_name || "") + ' ' + values[i].last_name;
-        row.appendChild(nameCell);
+        createNameCell(values[i].url, row);
 
         var numberPartyVotes = document.createElement('td');
         numberPartyVotes.innerHTML = values[i].total_votes;
@@ -353,28 +356,27 @@ function mostLoyalTable(storedData) {
 }
 
 function calculateStatistics(storedData) {
-    var allDemocrats = getPartyMemberList(storedData, "D");
-    statistics.parties[0].total_reps = allDemocrats.length;
-
-    var allRepublicans = getPartyMemberList(storedData, "R");
-    statistics.parties[1].total_reps = allRepublicans.length;
-
-    var allIndependents = getPartyMemberList(storedData, "I");
-    statistics.parties[2].total_reps = allIndependents.length;
-
+    statistics.parties[0].total_reps = getPartyMemberList(storedData, "D").length;
+    statistics.parties[1].total_reps = getPartyMemberList(storedData, "R").length;
+    statistics.parties[2].total_reps = getPartyMemberList(storedData, "I").length;
     statistics.parties[3].total_reps = storedData.results[0].members.length;
 
     var percentageDemocrats = getAveragePercentPartyVotes(storedData, "D");
-    statistics.parties[0].votes_percentage = parseFloat(Math.round(percentageDemocrats * 100) / 100).toFixed(2);
+    statistics.parties[0].votes_percentage = parseFloat(Math.round(getAveragePercentPartyVotes(storedData, "D") * 100) / 100).toFixed(2);
 
     var percentageRepublicans = getAveragePercentPartyVotes(storedData, "R");
-    statistics.parties[1].votes_percentage = parseFloat(Math.round(percentageRepublicans * 100) / 100).toFixed(2);
+    statistics.parties[1].votes_percentage = parseFloat(Math.round(getAveragePercentPartyVotes(storedData, "R") * 100) / 100).toFixed(2);
 
     var percentageIndependents = getAveragePercentPartyVotes(storedData, "I");
     statistics.parties[2].votes_percentage = parseFloat(Math.round(percentageIndependents * 100) / 100).toFixed(2);
 
-    var averagePercentage = (percentageDemocrats + percentageRepublicans + percentageIndependents) / 3;
-    statistics.parties[3].votes_percentage = parseFloat(Math.round(averagePercentage * 100) / 100).toFixed(2);
+    var averagePercentage = ((percentageDemocrats + percentageRepublicans + percentageIndependents) / 3).toFixed(2);
+    
+    if (percentageIndependents == 0) {
+        averagePercentage = ((percentageDemocrats + percentageRepublicans) / 2).toFixed(2);
+    }
+    
+    statistics.parties[3].votes_percentage = averagePercentage;
     
     findLeastEngagedMembersAllParties(storedData);
     findMostEngagedMembersAllParties(storedData);
