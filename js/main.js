@@ -17,6 +17,7 @@ var app = new Vue({
         averagePercentageRepublicans: 0,
         averagePercentageIndependents: 0,
         totalAveragePercentage: 0,
+        loading: false,
     },
     methods: {
         fetchData: function () {
@@ -40,12 +41,17 @@ var app = new Vue({
                 console.log('use house data');
                 url = urlHouse;
             }
-
+            
+            console.log('loading');
+            this.loading = true;
+            
             fetch(url, request)
                 .then(response => {
                     return response.json();
                 })
                 .then(data => {
+                    this.loading = false;
+                    console.log('loaded');
                     this.senators = data.results[0].members;
                     this.getStates();
                     this.getTotalDemocrats();

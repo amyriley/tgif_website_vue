@@ -1,23 +1,28 @@
+.col {
+    padding-right: 25px;
+    padding-left: 25px;
+}
+
 header {
     margin-top: 20px;
     margin-bottom: 30px;    
 }
 
+p {
+    padding-bottom: 10px;
+}
+
 .navbar {
-    margin-bottom: 75px;
+    margin-bottom: 50px;
 }
 
 h1 {
     padding-top: 10px;
 }
 
-#member-link {
-    color: black;
-    text-decoration: underline;
-}
-
-#member-link:hover {
-    color: #03aba5;
+h2 {
+    padding-bottom: 20px;
+    margin-top: 30px;
 }
 
 .card-link {
@@ -31,10 +36,6 @@ h1 {
 
 #mailto {
     color: #03aba5;
-}
-
-h2 {
-    margin-bottom: 20px;
 }
 
 .table {
@@ -85,21 +86,21 @@ h2 {
     height: 15px;
 }
 
+.checkbox-inline {
+    margin-right: 5px;
+    margin-left: 10px;
+}
+
 td {
+    text-align: center;
+}
+
+th {
     text-align: center;
 }
 
 thead {
     text-align: center;
-}
-
-#state-label {
-    margin-right: 5px;
-    margin-left: 50px;
-}
-
-.checkboxes {
-    padding-left: 10px;
 }
 
 

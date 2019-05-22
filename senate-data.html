@@ -75,8 +75,8 @@
                         <label id="state-label">Filter by state:
                             <select v-model="selectedState" id="state-filter" class="filter">
                                 <option value="All" selected>All</option>
-                                <option  v-for="state in stateList" v-bind:value="state">
-                                {{ state }}
+                                <option v-for="state in stateList" v-bind:value="state">
+                                    {{ state }}
                                 </option>
                             </select>
                         </label>
@@ -84,7 +84,7 @@
                 </div>
             </div>
             <table class="table table-striped" id="table-data">
-                <thead accesskey=""id="table-head" class="thead-dark">
+                <thead accesskey="" id="table-head" class="thead-dark">
                     <tr>
                         <th>Name</th>
                         <th>Party</th>
@@ -92,6 +92,11 @@
                         <th>Years in Office</th>
                         <th>% Votes w/ Party</th>
                     </tr>
+                    <template v-if="!filterMembers.length">
+                        <tr>
+                            <td>No results found.</td>
+                        </tr>
+                    </template>
                 </thead>
                 <tbody id="table-body">
                     <tr v-for="member in filterMembers">
